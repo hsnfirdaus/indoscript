@@ -3,7 +3,7 @@ package fungsi
 import (
 	"errors"
 	"fmt"
-	"indoscript/runtime/jenis"
+	"indoscript/penerjemah/jenis"
 )
 
 func Cetak(argument []interface{}) (interface{}, error) {
@@ -15,9 +15,6 @@ func Cetak(argument []interface{}) (interface{}, error) {
 
 		case *jenis.Teks:
 			fmt.Printf("%v", v.Teks)
-
-		case *jenis.Balikan:
-			Cetak([]interface{}{jenis.UnwrapBalikan[interface{}](v)})
 
 		default:
 			return nil, errors.New("Tidak dapat mencetak jenis ini")

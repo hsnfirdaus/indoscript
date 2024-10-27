@@ -1,6 +1,6 @@
 package utils
 
-type BasePosisi struct {
+type BasisPosisi struct {
 	Baris int
 	Kolom int
 }

@@ -1,12 +1,13 @@
 var lahir = 2003;
 var sekarang = 2024;
 var umurSaya = sekarang - lahir;
+var tua = benar;
 
 fungsi apakahTua(umur){
 
     var umur = umur - 10;
     
-    jika ( umur > 20 ) {
+    jika ( umur > 20 atau (lahir == 2003 dan 10 > 11) atau tua ) {
         balikan "TUA BANGET";
     }
 
@@ -16,3 +17,4 @@ fungsi apakahTua(umur){
 cetakBr("Umur Saya:");
 cetakBr(umurSaya);
 cetakBr(apakahTua(umurSaya));
+cetakBr(umurSaya ^ 2);

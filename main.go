@@ -2,9 +2,9 @@ package main
 
 import (
 	"errors"
-	"indoscript/lexer"
-	"indoscript/parser"
-	"indoscript/runtime"
+	"indoscript/lekser"
+	"indoscript/penerjemah"
+	"indoscript/pengurai"
 	"os"
 )
 
@@ -26,21 +26,20 @@ func main() {
 		println("File \"" + filePath + "\" tidak dapat diakses!")
 		os.Exit(1)
 	}
-	lex := lexer.Baru(string(file))
-	tokenToken, lexErr := lex.Tokenisasi()
-	if lexErr != nil {
-		println(lexErr.Error())
+	lek := lekser.LekserBaru(string(file))
+	tokenToken, lekErr := lek.Tokenisasi()
+	if lekErr != nil {
+		println(lekErr.Error())
 		os.Exit(1)
 	}
 
-	par := parser.Baru(tokenToken)
-	ast, parErr := par.Parse()
+	par := pengurai.PenguraiBaru(tokenToken)
+	ast, parErr := par.Urai()
 	if parErr != nil {
 		println(parErr.Error())
 		os.Exit(1)
 	}
-	rt := runtime.Runtime{}
-	rt.Baru()
+	rt := penerjemah.PenerjemahBaru()
 	terErr := rt.Jalankan(ast)
 	if terErr != nil {
 		println(terErr.Error())

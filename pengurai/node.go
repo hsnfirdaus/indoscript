@@ -1,73 +1,86 @@
-package parser
+package pengurai
 
 import (
-	"indoscript/lexer"
+	"indoscript/lekser"
 	"indoscript/utils"
 )
 
 type NodeAkar struct {
+	utils.BasisPosisi
 	NodeNode []interface{}
 }
 
 type NodeBilangan struct {
-	utils.BasePosisi
-	Token lexer.Token
+	utils.BasisPosisi
+	Token lekser.Token
 }
 
 type NodeTeks struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	Teks string
 }
 
+type NodeBoolean struct {
+	utils.BasisPosisi
+	Isi bool
+}
+
 type NodeTidak struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	Node interface{}
 }
 
 type NodeOperasi struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	NodeKiri  interface{}
-	Operasi   lexer.JenisToken
+	Operasi   lekser.JenisToken
 	NodeKanan interface{}
 }
 
 type NodeOperasiUner struct {
-	utils.BasePosisi
-	Token lexer.JenisToken
+	utils.BasisPosisi
+	Token lekser.JenisToken
 	Node  interface{}
 }
 
+type NodeOperasiDanAtau struct {
+	utils.BasisPosisi
+	NodeKiri  interface{}
+	Operasi   string
+	NodeKanan interface{}
+}
+
 type NodeAturVariabel struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	NamaVariabel string
 	Node         interface{}
 }
 
 type NodeAksesVariabel struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	NamaVariabel string
 }
 
 type NodeAturFungsi struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	NamaFungsi  string
 	NamaArgumen []string
 	NodeNode    *NodeAkar
 }
 
 type NodePanggilFungsi struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	NamaFungsi string
 	Argumen    []interface{}
 }
 
 type NodeJika struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	Kondisi  interface{}
 	NodeNode *NodeAkar
 }
 
 type NodeBalikan struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	Node interface{}
 }

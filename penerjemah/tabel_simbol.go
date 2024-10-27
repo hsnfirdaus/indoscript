@@ -1,12 +1,13 @@
-package runtime
+package penerjemah
 
 import (
-	"indoscript/parser"
+	"errors"
+	"indoscript/pengurai"
 )
 
 type ButirFungsi struct {
 	namaArgument []string
-	nodeAkar     *parser.NodeAkar
+	nodeAkar     *pengurai.NodeAkar
 }
 
 type TabelSimbol struct {
@@ -15,10 +16,13 @@ type TabelSimbol struct {
 	induk    *TabelSimbol
 }
 
-func (ts *TabelSimbol) Baru(induk *TabelSimbol) {
+func TabelSimbolBaru(induk *TabelSimbol) TabelSimbol {
+	ts := TabelSimbol{}
 	ts.variabel = make(map[string]interface{})
 	ts.fungsi = make(map[string]ButirFungsi)
 	ts.induk = induk
+
+	return ts
 }
 
 func (ts *TabelSimbol) ambilVar(pengenal string) (interface{}, error) {
@@ -29,6 +33,8 @@ func (ts *TabelSimbol) ambilVar(pengenal string) (interface{}, error) {
 			return nil, err
 		}
 		return val, nil
+	} else if !ok {
+		return nil, errors.New("Variabel tak terdefinisikan : " + pengenal)
 	}
 
 	return val, nil
@@ -46,12 +52,14 @@ func (ts *TabelSimbol) ambilFung(pengenal string) (*ButirFungsi, error) {
 			return nil, err
 		}
 		return val, nil
+	} else if !ok {
+		return nil, errors.New("Fungsi tak terdefinisikan: " + pengenal)
 	}
 
 	return &val, nil
 }
 
-func (ts *TabelSimbol) aturFung(pengenal string, namaAgumen []string, nodeAkar *parser.NodeAkar) {
+func (ts *TabelSimbol) aturFung(pengenal string, namaAgumen []string, nodeAkar *pengurai.NodeAkar) {
 	ts.fungsi[pengenal] = ButirFungsi{
 		namaArgument: namaAgumen,
 		nodeAkar:     nodeAkar,

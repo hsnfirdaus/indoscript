@@ -1,12 +1,12 @@
-package lexer
+package lekser
 
 import "indoscript/utils"
 
 type JenisToken string
 
 const (
-	T_BUL JenisToken = "BULAT"
-	T_DES JenisToken = "DESIMAL"
+	T_BUL JenisToken = "BUL"
+	T_DES JenisToken = "DES"
 
 	T_TAMBAH  JenisToken = "TAMBAH"
 	T_KURANG  JenisToken = "KURANG"
@@ -45,7 +45,7 @@ var TOKEN_PERBANDINGAN = []JenisToken{
 }
 
 type Token struct {
-	utils.BasePosisi
+	utils.BasisPosisi
 	Jenis JenisToken
 	Isi   interface{}
 }

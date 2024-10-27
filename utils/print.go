@@ -1,8 +1,9 @@
 package utils
 
-import "encoding/json"
+import (
+	"fmt"
+)
 
-func PrintJson(content interface{}) {
-	text, _ := json.MarshalIndent(content, "", "\t")
-	println(string(text))
+func PrintStruct(content interface{}) {
+	fmt.Printf("%#v", content)
 }
