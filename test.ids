@@ -1,0 +1,18 @@
+var lahir = 2003;
+var sekarang = 2024;
+var umurSaya = sekarang - lahir;
+
+fungsi apakahTua(umur){
+
+    var umur = umur - 10;
+    
+    jika ( umur > 20 ) {
+        balikan "TUA BANGET";
+    }
+
+    balikan "MASIH MUDA";
+}
+
+cetakBr("Umur Saya:");
+cetakBr(umurSaya);
+cetakBr(apakahTua(umurSaya));
