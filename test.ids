@@ -1,13 +1,8 @@
-var lahir = 2003;
-var sekarang = 2024;
-var umurSaya = sekarang - lahir;
-var tua = salah;
-
 fungsi apakahTua(umur){
 
     var umur = umur - 10;
     
-    jika ( umur > 40 atau tua ) {
+    jika ( umur > 40 ) {
         balikan "TUA BANGET";
     } lain jika (umur > 30) {
         balikan "MULAI TUA";
@@ -18,6 +13,26 @@ fungsi apakahTua(umur){
     balikan "HARUSNYA GA NYAMPE SINI";
 }
 
+fungsi ambilMasukan(label){
+    cetak(label);
+    var nama = masukan();
+
+    jika (nama == ""){
+        balikan ambilMasukan(label);
+    }
+
+    balikan nama;
+}
+
+var nama = ambilMasukan("Nama Anda: ");
+var lahir = keBilangan(ambilMasukan("Tahun Lahir: "));
+var sekarang = keBilangan(ambilMasukan("Tahun Saat Ini: "));
+
+var umurSaya = sekarang - lahir;
+
+cetakBr("===============");
+cetakBr("Nama Saya:");
+cetakBr(nama);
 cetakBr("Umur Saya:");
 cetakBr(umurSaya);
 cetakBr(apakahTua(umurSaya));

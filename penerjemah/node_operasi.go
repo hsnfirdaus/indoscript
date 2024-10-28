@@ -5,7 +5,6 @@ import (
 	"indoscript/lekser"
 	"indoscript/penerjemah/jenis"
 	"indoscript/pengurai"
-	"indoscript/utils"
 	"reflect"
 	"slices"
 )
@@ -27,11 +26,8 @@ func (p *Penerjemah) nodeOperasi(node *pengurai.NodeOperasi) (interface{}, *Kesa
 			res, er := kiri.OperasiBoolean(kanan, node.Operasi)
 			if er != nil {
 				return nil, &KesalahanPenerjemah{
-					BasisPosisi: utils.BasisPosisi{
-						Baris: node.Baris,
-						Kolom: node.Kolom,
-					},
-					pesan: er.Error(),
+					BasisPosisi: node.BasisPosisi,
+					pesan:       er.Error(),
 				}
 			}
 
@@ -41,11 +37,8 @@ func (p *Penerjemah) nodeOperasi(node *pengurai.NodeOperasi) (interface{}, *Kesa
 			bil, er := kiri.Operasi(kanan, node.Operasi)
 			if er != nil {
 				return nil, &KesalahanPenerjemah{
-					BasisPosisi: utils.BasisPosisi{
-						Baris: node.Baris,
-						Kolom: node.Kolom,
-					},
-					pesan: er.Error(),
+					BasisPosisi: node.BasisPosisi,
+					pesan:       er.Error(),
 				}
 			}
 
@@ -61,11 +54,8 @@ func (p *Penerjemah) nodeOperasi(node *pengurai.NodeOperasi) (interface{}, *Kesa
 		res, er := kiri.OperasiBoolean(kanan, node.Operasi)
 		if er != nil {
 			return nil, &KesalahanPenerjemah{
-				BasisPosisi: utils.BasisPosisi{
-					Baris: node.Baris,
-					Kolom: node.Kolom,
-				},
-				pesan: er.Error(),
+				BasisPosisi: node.BasisPosisi,
+				pesan:       er.Error(),
 			}
 		}
 
@@ -80,11 +70,8 @@ func (p *Penerjemah) nodeOperasi(node *pengurai.NodeOperasi) (interface{}, *Kesa
 		res, er := kiri.OperasiBoolean(kanan, node.Operasi)
 		if er != nil {
 			return nil, &KesalahanPenerjemah{
-				BasisPosisi: utils.BasisPosisi{
-					Baris: node.Baris,
-					Kolom: node.Kolom,
-				},
-				pesan: er.Error(),
+				BasisPosisi: node.BasisPosisi,
+				pesan:       er.Error(),
 			}
 		}
 
@@ -93,11 +80,8 @@ func (p *Penerjemah) nodeOperasi(node *pengurai.NodeOperasi) (interface{}, *Kesa
 	}
 
 	return nil, &KesalahanPenerjemah{
-		BasisPosisi: utils.BasisPosisi{
-			Baris: node.Baris,
-			Kolom: node.Kolom,
-		},
-		pesan: fmt.Sprint("Operasi tidak dapat dilakukan pada jenis ", reflect.TypeOf(nodeKiri), "!"),
+		BasisPosisi: node.BasisPosisi,
+		pesan:       fmt.Sprint("Operasi tidak dapat dilakukan pada jenis ", reflect.TypeOf(nodeKiri), "!"),
 	}
 }
 func (p *Penerjemah) nodeOperasiUner(node *pengurai.NodeOperasiUner) (*jenis.Bilangan, *KesalahanPenerjemah) {
@@ -110,11 +94,8 @@ func (p *Penerjemah) nodeOperasiUner(node *pengurai.NodeOperasiUner) (*jenis.Bil
 		bil, err := angka.Operasi(&jenis.Bilangan{Angka: -1}, lekser.T_KALI)
 		if err != nil {
 			return nil, &KesalahanPenerjemah{
-				BasisPosisi: utils.BasisPosisi{
-					Baris: node.Baris,
-					Kolom: node.Kolom,
-				},
-				pesan: err.Error(),
+				BasisPosisi: node.BasisPosisi,
+				pesan:       err.Error(),
 			}
 		}
 		return bil, nil
@@ -145,10 +126,7 @@ func (p *Penerjemah) nodeOperasiDanAtau(node *pengurai.NodeOperasiDanAtau) (*jen
 	}
 
 	return nil, &KesalahanPenerjemah{
-		BasisPosisi: utils.BasisPosisi{
-			Baris: node.Baris,
-			Kolom: node.Kolom,
-		},
-		pesan: "Operasi " + node.Operasi + " tidak valid!",
+		BasisPosisi: node.BasisPosisi,
+		pesan:       "Operasi " + node.Operasi + " tidak valid!",
 	}
 }

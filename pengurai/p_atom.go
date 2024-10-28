@@ -9,7 +9,13 @@ func (p *Pengurai) atom() (interface{}, *TokenTakTerduga) {
 		return nil, nil
 	}
 
-	if tok.Jenis == lekser.T_KATKUN {
+	if p.tokenSaatIni.Jenis == lekser.T_TEKS {
+		p.maju()
+		return &NodeTeks{
+			BasisPosisi: tok.BasisPosisi,
+			Teks:        tok.Isi.(string),
+		}, nil
+	} else if tok.Jenis == lekser.T_KATKUN {
 		switch tok.Isi {
 		case lekser.KK_BENAR:
 			p.maju()

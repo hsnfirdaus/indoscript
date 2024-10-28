@@ -106,7 +106,7 @@ func (lek *Lekser) Tokenisasi() ([]Token, *KesalahanLekser) {
 			default:
 				return nil, &KesalahanLekser{
 					BasisPosisi: lek.basisPosisi(),
-					detail:      "Karakter tidak valid: " + lek.karakterSaatIni,
+					detail:      "Karakter tidak valid: \"" + lek.karakterSaatIni + "\"",
 				}
 
 			}

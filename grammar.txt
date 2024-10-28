@@ -5,8 +5,7 @@ deklarasi       : KATKUN:var PENGENAL SD expr;
                 : KATKUN:return expr;
                 : atom-fn;
 
-expr            : TEKS
-                : matBanding ((KEYWORD:dan|KEYWORD:atau) matBanding)*
+expr            : matBanding ((KEYWORD:dan|KEYWORD:atau) matBanding)*
 
 matBanding      : TIDAK matExpr
                 : matExpr ((KDAR|LDAR|KDARSD|LDARSD|SDSD|TDSD) matExpr)*
@@ -19,6 +18,6 @@ faktor          : (TAMBAH|KURANG) pangkat
 
 pangkat         : atom (POW faktor) *
 
-atom            : BUL|DES|PENGENAL|KATKUN:benar|KATKUN:salah
+atom            : BUL|DES|PENGENAL|KATKUN:benar|KATKUN:salah|TEKS
                 : BKUR expr TKUR
 atom-fn         : PENGENAL (BKUR (expr,*) TKUR)

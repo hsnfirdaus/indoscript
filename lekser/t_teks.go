@@ -7,7 +7,7 @@ func (lek *Lekser) tokenisasiTeks() Token {
 
 	lek.maju()
 	escaped := false
-	for {
+	for lek.karakterSaatIni != pemisah {
 		teks = teks + lek.karakterSaatIni
 		lek.maju()
 		if lek.karakterSaatIni == "\\" {

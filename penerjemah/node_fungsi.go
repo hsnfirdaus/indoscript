@@ -5,7 +5,6 @@ import (
 	"indoscript/penerjemah/fungsi"
 	"indoscript/penerjemah/jenis"
 	"indoscript/pengurai"
-	"indoscript/utils"
 )
 
 func (p *Penerjemah) nodeAturFungsi(node *pengurai.NodeAturFungsi) (interface{}, *KesalahanPenerjemah) {
@@ -35,26 +34,34 @@ func (p *Penerjemah) nodePanggilFungsi(node *pengurai.NodePanggilFungsi) (interf
 	case "cetakBr":
 		hasilPanggil, err = fungsi.CetakBr(hasilArgumen)
 
+	case "masukan":
+		errArg := p.pastikanJumlahArgumen(node, len(hasilArgumen), 0)
+		if errArg != nil {
+			return nil, errArg
+		}
+		hasilPanggil, err = fungsi.Masukan()
+
+	case "keBilangan":
+		errArg := p.pastikanJumlahArgumen(node, len(hasilArgumen), 1)
+		if errArg != nil {
+			return nil, errArg
+		}
+		hasilPanggil, err = fungsi.KeBilangan(hasilArgumen[0])
+
 	default:
 		fung, _ := p.ts.ambilFung(node.NamaFungsi)
 		if fung == nil {
 			return nil, &KesalahanPenerjemah{
-				BasisPosisi: utils.BasisPosisi{
-					Baris: node.Baris,
-					Kolom: node.Kolom,
-				},
-				pesan: "Tidak ditemukan fungsi dengan nama \"" + node.NamaFungsi + "\"",
+				BasisPosisi: node.BasisPosisi,
+				pesan:       "Tidak ditemukan fungsi dengan nama \"" + node.NamaFungsi + "\"",
 			}
 		}
 
 		hasil, err := p.lakukanPanggilFungsiTS(fung, hasilArgumen)
 		if err != nil {
 			return nil, &KesalahanPenerjemah{
-				BasisPosisi: utils.BasisPosisi{
-					Baris: node.Baris,
-					Kolom: node.Kolom,
-				},
-				pesan: "Fungsi \"" + node.NamaFungsi + "\": " + err.Error(),
+				BasisPosisi: node.BasisPosisi,
+				pesan:       "Fungsi \"" + node.NamaFungsi + "\": " + err.pesan,
 			}
 		}
 		return hasil, nil
@@ -63,21 +70,28 @@ func (p *Penerjemah) nodePanggilFungsi(node *pengurai.NodePanggilFungsi) (interf
 
 	if err != nil {
 		return nil, &KesalahanPenerjemah{
-			BasisPosisi: utils.BasisPosisi{
-				Baris: node.Baris,
-				Kolom: node.Kolom,
-			},
-			pesan: err.Error(),
+			BasisPosisi: node.BasisPosisi,
+			pesan:       err.Error(),
 		}
 	}
 
 	return hasilPanggil, nil
 }
 
+func (p *Penerjemah) pastikanJumlahArgumen(node *pengurai.NodePanggilFungsi, jumlahDiatur int, jumlahSeharusnya int) *KesalahanPenerjemah {
+	if jumlahDiatur != jumlahSeharusnya {
+		return &KesalahanPenerjemah{
+			BasisPosisi: node.BasisPosisi,
+			pesan:       fmt.Sprint("Fungsi \"", node.NamaFungsi, "\": argumen dibutuhkan ", jumlahSeharusnya, " diberikan ", jumlahDiatur),
+		}
+	}
+	return nil
+}
+
 func (p *Penerjemah) lakukanPanggilFungsiTS(fung *ButirFungsi, argumen []interface{}) (interface{}, *KesalahanPenerjemah) {
 	if len(argumen) != len(fung.namaArgument) {
 		return nil, &KesalahanPenerjemah{
-			pesan: fmt.Sprint("Argumen dibutuhkan ", len(fung.namaArgument), " diberikan ", len(argumen)),
+			pesan: fmt.Sprint("argumen dibutuhkan ", len(fung.namaArgument), " diberikan ", len(argumen)),
 		}
 	}
 	pAnak := p.buatAnak()

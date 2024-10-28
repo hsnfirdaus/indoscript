@@ -2,7 +2,6 @@ package penerjemah
 
 import (
 	"indoscript/pengurai"
-	"indoscript/utils"
 )
 
 func (p *Penerjemah) nodeAturVariabel(node *pengurai.NodeAturVariabel) (interface{}, *KesalahanPenerjemah) {
@@ -20,11 +19,8 @@ func (p *Penerjemah) nodeAksesVariabel(node *pengurai.NodeAksesVariabel) (interf
 	isi, err := p.ts.ambilVar(node.NamaVariabel)
 	if err != nil {
 		return nil, &KesalahanPenerjemah{
-			BasisPosisi: utils.BasisPosisi{
-				Baris: node.Baris,
-				Kolom: node.Kolom,
-			},
-			pesan: "Variabel tidak didefinisikan: " + node.NamaVariabel,
+			BasisPosisi: node.BasisPosisi,
+			pesan:       "Variabel tidak didefinisikan: " + node.NamaVariabel,
 		}
 	}
 
