@@ -3,6 +3,7 @@ package lekser
 const (
 	KK_VAR     = "var"
 	KK_JIKA    = "jika"
+	KK_LAIN    = "lain"
 	KK_ATAU    = "atau"
 	KK_DAN     = "dan"
 	KK_FUNGSI  = "fungsi"
@@ -14,6 +15,7 @@ const (
 var KATKUN = []string{
 	KK_VAR,
 	KK_JIKA,
+	KK_LAIN,
 	KK_ATAU,
 	KK_DAN,
 	KK_FUNGSI,

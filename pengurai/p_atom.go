@@ -14,13 +14,15 @@ func (p *Pengurai) atom() (interface{}, *TokenTakTerduga) {
 		case lekser.KK_BENAR:
 			p.maju()
 			return &NodeBoolean{
-				Isi: true,
+				BasisPosisi: p.basisPosisi(),
+				Isi:         true,
 			}, nil
 
 		case lekser.KK_SALAH:
 			p.maju()
 			return &NodeBoolean{
-				Isi: false,
+				BasisPosisi: p.basisPosisi(),
+				Isi:         false,
 			}, nil
 		}
 	} else if tok.Jenis == lekser.T_PENGENAL {
@@ -58,8 +60,9 @@ func (p *Pengurai) atom() (interface{}, *TokenTakTerduga) {
 			p.maju()
 
 			return &NodePanggilFungsi{
-				NamaFungsi: tok.Isi.(string),
-				Argumen:    daftarArgument,
+				BasisPosisi: p.basisPosisi(),
+				NamaFungsi:  tok.Isi.(string),
+				Argumen:     daftarArgument,
 			}, nil
 		}
 

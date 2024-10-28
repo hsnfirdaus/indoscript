@@ -59,8 +59,11 @@ func (b *Bilangan) OperasiBoolean(targetBil *Bilangan, op lekser.JenisToken) (*B
 	case lekser.T_SDSD:
 		hasil = b.Angka == targetBil.Angka
 
+	case lekser.T_TDSD:
+		hasil = b.Angka != targetBil.Angka
+
 	default:
-		return nil, errors.New(fmt.Sprint("Operasi tak terduga: ", op))
+		return nil, errors.New(fmt.Sprint("Operasi BILANGAN tak terduga: ", op))
 	}
 
 	return &Boolean{

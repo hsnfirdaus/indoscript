@@ -24,6 +24,7 @@ const (
 	T_KDARSD JenisToken = "KDARSD" // Kurang Dari Sama Dengan
 	T_LDARSD JenisToken = "LDARSD" // Lebih Dari Sama Dengan
 	T_SDSD   JenisToken = "SDSD"   // Sama Dengan Sama Dengan
+	T_TDSD   JenisToken = "TDSD"   // Tidak Sama Dengan
 	T_TIDAK  JenisToken = "TIDAK"
 
 	T_KATKUN   JenisToken = "KATKUN"   // Kata Kunci / keyword
@@ -42,6 +43,7 @@ var TOKEN_PERBANDINGAN = []JenisToken{
 	T_KDARSD,
 	T_LDARSD,
 	T_SDSD,
+	T_TDSD,
 }
 
 type Token struct {

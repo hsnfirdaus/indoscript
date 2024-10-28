@@ -1,17 +1,21 @@
 var lahir = 2003;
 var sekarang = 2024;
 var umurSaya = sekarang - lahir;
-var tua = benar;
+var tua = salah;
 
 fungsi apakahTua(umur){
 
     var umur = umur - 10;
     
-    jika ( umur > 20 atau (lahir == 2003 dan 10 > 11) atau tua ) {
+    jika ( umur > 40 atau tua ) {
         balikan "TUA BANGET";
+    } lain jika (umur > 30) {
+        balikan "MULAI TUA";
+    } lain {
+        balikan "MASIH MUDA";
     }
 
-    balikan "MASIH MUDA";
+    balikan "HARUSNYA GA NYAMPE SINI";
 }
 
 cetakBr("Umur Saya:");

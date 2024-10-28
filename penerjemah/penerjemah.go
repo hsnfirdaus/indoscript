@@ -115,3 +115,20 @@ func (p *Penerjemah) panggilNodeBoolean(node interface{}) (*jenis.Boolean, *Kesa
 
 	return isiBool, nil
 }
+func (p *Penerjemah) panggilNodeTeks(node interface{}) (*jenis.Teks, *KesalahanPenerjemah) {
+	isi, err := p.panggilNode(node)
+	if err != nil {
+		return nil, err
+	}
+
+	isiTeks, ok := isi.(*jenis.Teks)
+	if !ok {
+		jenisAsli := reflect.TypeOf(isi)
+		return nil, &KesalahanPenerjemah{
+			// TODO: How to get baris kolom without assert one by one
+			pesan: jenisAsli.String() + " bukan merupakan boolean!",
+		}
+	}
+
+	return isiTeks, nil
+}

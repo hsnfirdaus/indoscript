@@ -1,6 +1,6 @@
 akar            : []deklarasi
 deklarasi       : KATKUN:var PENGENAL SD expr;
-                : KATKUN:jika(expr){akar}
+                : KATKUN:jika(expr){ akar } (lain jika(expr) { akar })* (lain { akar })?
                 : KATKUN:fungsi PENGENAL(BKUR (PENGENAL, *) TKUR){akar}
                 : KATKUN:return expr;
                 : atom-fn;
@@ -9,7 +9,7 @@ expr            : TEKS
                 : matBanding ((KEYWORD:dan|KEYWORD:atau) matBanding)*
 
 matBanding      : TIDAK matExpr
-                : matExpr ((KDAR|LDAR|KDARSD|LDARSD|SDSD) matExpr)*
+                : matExpr ((KDAR|LDAR|KDARSD|LDARSD|SDSD|TDSD) matExpr)*
 
 matExpr         : term ((TAMBAH|KURANG) term)*
 
@@ -19,6 +19,6 @@ faktor          : (TAMBAH|KURANG) pangkat
 
 pangkat         : atom (POW faktor) *
 
-atom            : BUL|DES|PENGENAL|KATKUN:benar|KATKUN:fungsi
+atom            : BUL|DES|PENGENAL|KATKUN:benar|KATKUN:salah
                 : BKUR expr TKUR
 atom-fn         : PENGENAL (BKUR (expr,*) TKUR)

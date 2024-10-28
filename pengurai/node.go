@@ -74,10 +74,16 @@ type NodePanggilFungsi struct {
 	Argumen    []interface{}
 }
 
-type NodeJika struct {
-	utils.BasisPosisi
+type kasusLain struct {
 	Kondisi  interface{}
 	NodeNode *NodeAkar
+}
+type NodeJika struct {
+	utils.BasisPosisi
+	Kondisi   interface{}
+	NodeNode  *NodeAkar
+	KasusLain []kasusLain
+	LainLain  *NodeAkar
 }
 
 type NodeBalikan struct {

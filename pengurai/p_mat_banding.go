@@ -15,6 +15,6 @@ func (p *Pengurai) matBanding() (interface{}, *TokenTakTerduga) {
 			Node: hasil,
 		}, nil
 	}
-	return p.operasi(p.matExpr, p.matExpr, []lekser.JenisToken{lekser.T_KDAR, lekser.T_LDAR, lekser.T_KDARSD, lekser.T_LDARSD, lekser.T_SDSD})
+	return p.operasi(p.matExpr, p.matExpr, lekser.TOKEN_PERBANDINGAN)
 
 }
