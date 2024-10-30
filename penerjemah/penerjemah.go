@@ -7,11 +7,14 @@ import (
 )
 
 type Penerjemah struct {
-	ts *TabelSimbol
+	ts         *TabelSimbol
+	fnKeluaran func(string)
 }
 
-func PenerjemahBaru() Penerjemah {
-	p := Penerjemah{}
+func PenerjemahBaru(fnKeluaran func(string)) Penerjemah {
+	p := Penerjemah{
+		fnKeluaran: fnKeluaran,
+	}
 	ts := TabelSimbolBaru(nil)
 	p.ts = &ts
 
@@ -21,7 +24,8 @@ func PenerjemahBaru() Penerjemah {
 func (p *Penerjemah) buatAnak() Penerjemah {
 	ts := TabelSimbolBaru(p.ts)
 	pb := Penerjemah{
-		ts: &ts,
+		fnKeluaran: p.fnKeluaran,
+		ts:         &ts,
 	}
 
 	return pb

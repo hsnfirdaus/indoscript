@@ -29,17 +29,13 @@ func (p *Penerjemah) nodePanggilFungsi(node *pengurai.NodePanggilFungsi) (interf
 
 	switch node.NamaFungsi {
 	case "cetak":
-		hasilPanggil, err = fungsi.Cetak(hasilArgumen)
+		hasilPanggil, err = fungsi.Cetak(p.fnKeluaran, hasilArgumen)
 
 	case "cetakBr":
-		hasilPanggil, err = fungsi.CetakBr(hasilArgumen)
+		hasilPanggil, err = fungsi.CetakBr(p.fnKeluaran, hasilArgumen)
 
 	case "masukan":
-		errArg := p.pastikanJumlahArgumen(node, len(hasilArgumen), 0)
-		if errArg != nil {
-			return nil, errArg
-		}
-		hasilPanggil, err = fungsi.Masukan()
+		hasilPanggil, err = fungsi.Masukan(p.fnKeluaran, hasilArgumen)
 
 	case "keBilangan":
 		errArg := p.pastikanJumlahArgumen(node, len(hasilArgumen), 1)

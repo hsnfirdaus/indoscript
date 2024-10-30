@@ -1,3 +1,6 @@
+//go:build !wasm
+// +build !wasm
+
 package fungsi
 
 import (
@@ -6,7 +9,8 @@ import (
 	"os"
 )
 
-func Masukan() (*jenis.Teks, error) {
+func Masukan(fnKeluaran func(string), argument []interface{}) (*jenis.Teks, error) {
+	Cetak(fnKeluaran, argument)
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 
